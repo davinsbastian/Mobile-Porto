@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Mobile Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+  :root {
+    --color-bg: #ffffff;
+    --color-primary: #111827; /* Dark Gray */
+    --color-secondary: #6b7280; /* Neutral Gray */
+    --color-accent: #2563eb; /* Blue */
+    --color-accent-hover: #1d4ed8;
+    --color-card-bg: #f9fafb;
+    --radius: 0.75rem;
+    --transition-fast: 0.25s ease-in-out;
+  }
+
+  /* Reset */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  a:hover,
+  a:focus {
+    color: var(--color-accent-hover);
+  }
+
+  main {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 3rem;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-bg);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.05);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    user-select: none;
+  }
+
+  nav a {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-left: 1.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius);
+    color: var(--color-secondary);
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  nav a:hover,
+  nav a:focus {
+    color: var(--color-primary);
+    background-color: var(--color-card-bg);
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 3rem 1rem 4rem;
+  }
+
+  .hero h1 {
+    font-size: 2.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+    color: var(--color-primary);
+  }
+
+  .hero p {
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: var(--color-secondary);
+    margin-bottom: 1.75rem;
+  }
+
+  .btn-primary {
+    background-color: var(--color-accent);
+    color: white;
+    font-weight: 600;
+    font-size: 1.125rem;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgb(37 99 235 / 0.3);
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: var(--color-accent-hover);
+    box-shadow: 0 8px 14px rgb(29 78 216 / 0.5);
+    transform: scale(1.05);
+  }
+
+  /* Sections */
+  section {
+    margin-bottom: 4rem;
+  }
+
+  h2.section-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 0.75rem;
+  }
+
+  /* Portfolio Cards */
+  .portfolio-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .card {
+    background: var(--color-card-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.05);
+    padding: 1.5rem;
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .card:hover,
+  .card:focus-within {
+    box-shadow: 0 8px 16px rgb(0 0 0 / 0.1);
+    transform: translateY(-4px);
+  }
+
+  .card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+  }
+
+  .card p {
+    color: var(--color-secondary);
+    font-size: 0.95rem;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.3;
+  }
+
+  .card a {
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .card a:hover,
+  .card a:focus {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+  }
+
+  /* About */
+  .about-text {
+    font-size: 1rem;
+    color: var(--color-secondary);
+    line-height: 1.5;
+  }
+
+  /* Skills */
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .skill {
+    background: var(--color-card-bg);
+    border-radius: var(--radius);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.05);
+  }
+
+  /* Contact Form */
+  form {
+    max-width: 100%;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--color-primary);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    font-size: 1rem;
+    border-radius: var(--radius);
+    border: 1.5px solid #d1d5db;
+    background: var(--color-bg);
+    color: var(--color-primary);
+    transition: border-color var(--transition-fast);
+    resize: vertical;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 5px rgb(37 99 235 / 0.4);
+  }
+
+  textarea {
+    min-height: 6rem;
+  }
+
+  button[type="submit"] {
+    margin-top: 1rem;
+    background-color: var(--color-accent);
+    color: white;
+    font-weight: 600;
+    font-size: 1.125rem;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgb(37 99 235 / 0.3);
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  button[type="submit"]:hover,
+  button[type="submit"]:focus {
+    background-color: var(--color-accent-hover);
+    box-shadow: 0 8px 14px rgb(29 78 216 / 0.5);
+    transform: scale(1.05);
+  }
+
+  /* Responsive container queries could be added if desired, but for mobile it's mainly max-width */
+
+  /* Utility */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" aria-label="Portfolio Logo">DavinSbastian</div>
+  <nav aria-label="Primary Navigation">
+    <a href="#portfolio" tabindex="0">Portfolio</a>
+    <a href="#about" tabindex="0">About</a>
+    <a href="#contact" tabindex="0">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" role="banner" aria-label="Introduction">
+    <h1>Hi, I'm Davin Sbastian</h1>
+    <p>Front-End Developer crafting elegant and modern mobile experiences</p>
+    <button class="btn-primary" onclick="scrollToSection('portfolio')" aria-label="Browse portfolio projects">Browse Portfolio</button>
+  </section>
+
+  <section id="portfolio" aria-label="Portfolio Projects">
+    <h2 class="section-title">Portfolio</h2>
+    <div class="portfolio-list">
+      <article class="card" tabindex="0" aria-labelledby="proj1-title">
+        <h3 id="proj1-title">Project One</h3>
+        <p>A e-commerce mobile site with seamless UX and performant animations.</p>
+        <a href="https://github.com/janedoe/project-one" target="_blank" rel="noopener">View Source</a>
+      </article>
+      <article class="card" tabindex="0" aria-labelledby="proj2-title">
+        <h3 id="proj2-title">Project Two</h3>
+        <p>A mobile-first blog platform featuring responsive typography and smooth reading.</p>
+        <a href="https://github.com/janedoe/project-two" target="_blank" rel="noopener">View Source</a>
+      </article>
+      <article class="card" tabindex="0" aria-labelledby="proj3-title">
+        <h3 id="proj3-title">Project Three</h3>
+        <p>Interactive portfolio showcasing animations and advanced CSS grid layouts.</p>
+        <a href="https://github.com/janedoe/project-three" target="_blank" rel="noopener">View Source</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="about" aria-label="About Me">
+    <h2 class="section-title">About Me</h2>
+    <p class="about-text">I’m a passionate front-end developer with experience in responsive mobile web design, animation, and performance optimization. I love transforming ideas into interactive, user-friendly digital experiences.</p>
+    <div class="skills-list" aria-label="My skills">
+      <span class="skill">HTML5</span>
+      <span class="skill">CSS3</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">React</span>
+      <span class="skill">Tailwind CSS</span>
+      <span class="skill">Ruby</span>
+      <span class="skill">Swift</span>
+      <span class="skill">Git</span>
+    </div>
+  </section>
+
+  <section id="contact" aria-label="Contact Form">
+    <h2 class="section-title">Get in Touch</h2>
+    <form onsubmit="handleSubmit(event)" novalidate>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your name" required aria-required="true" />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required aria-required="true" />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Your message" required aria-required="true"></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+</main>
+
+<script>
+  function scrollToSection(id) {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({behavior: 'smooth'});
+    }
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    if (!name || !email || !message) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    if (!/^[\\w.-]+@[\\w.-]+\\.\\w+$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    // Simulate form submission success
+    alert('Thank you, ' + name + '! Your message has been sent.');
+
+    // Reset form
+    form.reset();
+  }
+</script>
+</body>
+</html>
